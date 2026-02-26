@@ -1,14 +1,14 @@
 public class PalindromeCheckerApp {
 
     /*
-    UC7: Deque-Based Optimized Palindrome Checker
+    UC9: Recursive Palindrome Checker
     @author Developer
-    @version 7.0
+    @version 9.0
     */
 
     public static void main(String[] args) {
         System.out.println("Welcome to Palindrome Checker Management System");
-        System.out.println("Version : 7.0");
+        System.out.println("Version : 9.0");
         System.out.println("System initialized successfully");
 
         java.util.Scanner scanner = new java.util.Scanner(System.in);
@@ -25,18 +25,15 @@ public class PalindromeCheckerApp {
     }
     public static boolean isPalindrome(String input) {
         String normalized = input.replaceAll("\\s+", "").toLowerCase();
-        java.util.Deque<Character> deque = new java.util.LinkedList<>();
-        for (char ch : normalized.toCharArray()) {
-            deque.addLast(ch);
+        return checkRecursive(normalized, 0, normalized.length() - 1);
+    }
+    private static boolean checkRecursive(String str, int start, int end) {
+        if (start >= end) {
+            return true;
         }
-        while (deque.size() > 1) {
-            char front = deque.removeFirst();
-            char rear = deque.removeLast();
-
-            if (front != rear) {
-                return false;
-            }
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
         }
-        return true;
+        return checkRecursive(str, start + 1, end - 1);
     }
 }
